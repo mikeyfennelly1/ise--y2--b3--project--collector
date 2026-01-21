@@ -4,3 +4,8 @@ services:
     build: .
     ports:
       - "8080:8080"
+  nats:
+    image: nats:2.12.3-alpine3.22
+    container_name: nats
+    ports:
+      - "4222:4222"
