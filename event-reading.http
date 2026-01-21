@@ -1,0 +1,12 @@
+@api_host = http://localhost:8080
+@device_id = testDevice123
+
+### Post Event Reading
+POST {{api_host}}/event_reading/{{device_id}}
+Content-Type: application/json
+
+{
+  "temperature": 22.1,
+  "humidity": 65.3,
+  "pressure": 1012.5
+}

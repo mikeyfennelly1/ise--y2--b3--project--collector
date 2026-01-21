@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  run-event-reading:
+    desc: "Sends the event reading request using httpyac"
+    cmds:
+      - httpyac event-reading.http
+    silent: false
