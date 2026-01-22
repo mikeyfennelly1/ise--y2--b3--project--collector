@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: b3proj
+  nats:
+    port: 4222
+    topic-name: desktop-sysinfo
+
+logging:
+  level:
+    root: DEBUG
