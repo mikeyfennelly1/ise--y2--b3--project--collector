@@ -17,15 +17,6 @@ source "${BASEDIR}"/../scripts/helpers.sh
 
 SERVICE_NAME="collector"
 
-var_must_exist() {
-  for var_name in "$@"; do
-    if [ -z "${!var_name+x}" ]; then
-      echo "environment variable ${var_name} is unset. Exiting..."
-      exit 1
-    fi
-  done
-}
-
 ################################################
 # NATS is healthy
 ################################################
@@ -42,5 +33,7 @@ fi
 ################################################
 # Start API
 ################################################
-echo "${SERVICE_NAME}: Starting collector API..."
+echo "${SERVICE_NAME}: Starting API..."
+var_must_exist COLLECTOR_LISTEN_PORT
+export COLLECTOR_LISTEN_PORT
 "${BASEDIR}"/gradlew bootRun
