@@ -19,6 +19,9 @@ public class NatsConfiguration {
     private int natsPort;
 
     @Getter
+    @Value("${spring.nats.host}")
+    private String natsHost;
+    @Getter
     @Value("${spring.nats.topic-name}")
     private String sysinfoSubject;
 
@@ -45,6 +48,6 @@ public class NatsConfiguration {
     }
 
     private String hostName() {
-        return String.format("nats://localhost:%d", natsPort);
+        return String.format("nats://%s:%d", natsHost, natsPort);
     }
 }
