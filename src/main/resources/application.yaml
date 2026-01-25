@@ -8,4 +8,6 @@ spring:
 
 logging:
   level:
-    root: ${LOG_LEVEL:INFO}
+    root: ${COLLECTOR_LOG_LEVEL:INFO}
+server:
+  port: ${COLLECTOR_LISTEN_PORT:8080}
