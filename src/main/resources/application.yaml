@@ -2,9 +2,10 @@ spring:
   application:
     name: b3proj
   nats:
-    port: 4222
+    port: ${NATS_PORT:4222}
     topic-name: desktop-sysinfo
+    host: ${NATS_HOST:localhost}
 
 logging:
   level:
-    root: INFO
+    root: ${LOG_LEVEL:INFO}
