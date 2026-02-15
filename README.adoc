@@ -2,7 +2,7 @@
 
 [source, bash]
 ----
-docker tag ise--y2--b3--project--collector:<tagname> mikeyfennelly1/ise--y2--b3--project--collector:<tagname>
-docker push mikeyfennelly1/ise--y2--b3--project--collector:<tagname>
+`docker tag ise--y2--b3--project/collector:<version> ise--y2--b3--project/collector:<version>`
+`docker push ise--y2--b3--project/collector:<version>`
 ----
 

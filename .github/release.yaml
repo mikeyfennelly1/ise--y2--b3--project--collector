@@ -1,0 +1,34 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t your-image .
+
+      - name: Push to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker tag your-image your-dockerhub-user/your-image:latest
+          docker push your-dockerhub-user/your-image:latest
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VM_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull your-dockerhub-user/your-image:latest
+            docker stop myapp || true
+            docker rm myapp || true
+            docker run -d -p 80:8080 --name myapp your-dockerhub-user/your-image:latest
