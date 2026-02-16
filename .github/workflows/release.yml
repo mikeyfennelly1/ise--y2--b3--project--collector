@@ -29,6 +29,8 @@ jobs:
           semantic_version: 18
         env:
           GITHUB_TOKEN: ${{ secrets.GHA_PAT }}
+      - name: Print tag name
+        run: echo "The new tag is ${{ steps.semantic.outputs.new_release_tag }}"
 
   build-and-push:
     needs: release
