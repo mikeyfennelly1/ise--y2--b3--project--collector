@@ -8,6 +8,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
     outputs:
       tag_name: ${{ steps.semantic.outputs.new_release_tag }}
     steps:
