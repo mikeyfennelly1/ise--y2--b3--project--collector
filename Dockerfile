@@ -4,7 +4,7 @@ WORKDIR /home/gradle/src
 COPY build.gradle settings.gradle gradlew gradlew.bat ./
 COPY gradle ./gradle
 COPY src ./src
-RUN gradle build --no-daemon
+RUN gradle clean bootJar --no-daemon --info
 
 # Stage 2: Create the final image
 FROM eclipse-temurin:21-jdk-jammy
