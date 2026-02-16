@@ -4,8 +4,8 @@ module.exports = {
     'header-max-length': [2, 'always', 120],
     'subject-case': [
       2,
-      'never',
-      ['sentence-case', 'start-case', 'pascal-case', 'upper-case'],
+      'always',
+      ['lower-case', 'kebab-case', 'start-case', 'sentence-case'],
     ],
   },
 };
