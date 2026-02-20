@@ -6,3 +6,10 @@ tasks:
     cmds:
       - httpyac event-reading.http
     silent: false
+
+  retry-nats:
+    desc: "Run application startup script in retry-nats mode"
+    cmds:
+      - chmod +x ./start.sh
+      - ./start.sh retry-nats
+    silent: false
