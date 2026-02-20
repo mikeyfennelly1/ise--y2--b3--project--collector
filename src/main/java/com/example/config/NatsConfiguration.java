@@ -30,6 +30,9 @@ public class NatsConfiguration {
     @Value("${spring.nats.topic-name}")
     private String sysinfoSubject;
 
+    @Value("${collector.id}")
+    private String collectorName;
+
     @Getter
     private Connection connection;
 
@@ -67,6 +70,7 @@ public class NatsConfiguration {
                 .server(hostName())
                 .connectionTimeout(Duration.ofSeconds(5))
                 .maxReconnects(5)
+                .connectionName("ise--y2--b3--project--collector--" + collectorName)
                 .reconnectWait(Duration.ofSeconds(1))
                 .build();
         return Nats.connect(options);

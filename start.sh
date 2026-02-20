@@ -41,4 +41,4 @@ fi
 echo "${SERVICE_NAME}: Starting API..."
 var_must_exist COLLECTOR_LISTEN_PORT
 export COLLECTOR_LISTEN_PORT
-"${BASEDIR}"/gradlew bootRun
+"${BASEDIR}"/gradlew bootRun --args='--collector.id=1'
