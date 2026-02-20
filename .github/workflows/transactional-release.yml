@@ -11,14 +11,34 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: read
 
 jobs:
+
+  ########################################################################
+  # 0. VALIDATE COMMIT MESSAGE
+  ########################################################################
+
+  lint-commit:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit messages
+        uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: './commitlint.config.js'
+          failOnWarnings: true
+          commitDepth: 1
 
   ########################################################################
   # 1. COMPUTE NEXT VERSION (DRY RUN)
   ########################################################################
 
   compute-version:
+    needs: lint-commit
     runs-on: ubuntu-22.04
     outputs:
       next_version: ${{ steps.semantic.outputs.new_release_version }}

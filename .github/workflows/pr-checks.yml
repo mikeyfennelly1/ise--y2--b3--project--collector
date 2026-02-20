@@ -5,6 +5,10 @@ on:
     types: [opened, synchronize, reopened]
 
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   # Verify that the commit messages contain the valid semantic versioning prefixes.
   # Ensure that the docker image builds.
@@ -22,3 +26,4 @@ jobs:
         with:
           configFile: './commitlint.config.js'
           failOnWarnings: true
+          commitDepth: 1
