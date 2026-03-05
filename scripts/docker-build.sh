@@ -10,13 +10,14 @@ if [[ "$OS" == "Darwin" ]]; then
 else
 	BASEDIR=$(readlink -e "$(dirname "$0")/")
 fi
-cd "${BASEDIR}"
+pushd "${BASEDIR}/.."
 
-IMAGE_NAME="mikeyfennelly/ise-y2-b3-project-collector:dev"
-
-${BASEDIR}/gradlew bootJar
-cp "${BASEDIR}/app/build/libs/*SNAPSHOT.jar" "${BASEDIR}/app.jar"
-docker build -t "${IMAGE_NAME}" "${BASEDIR}/.."
+./gradlew bootJar
+cp ./app/build/libs/*SNAPSHOT.jar ./app.jar
+IMAGE_NAME="mikeyfennelly/ise-y2-b3-project-collector:dev-$(date "+%Y%m%d%H%M%S")"
+docker build -t "${IMAGE_NAME}" .
 
 docker login
 docker push "${IMAGE_NAME}"
+
+popd
