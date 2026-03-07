@@ -4,6 +4,7 @@ spring:
   nats:
     port: ${NATS_PORT:4222}
     topic-name: desktop-sysinfo
+    android-topic-name: android-device-metrics
     host: ${NATS_HOST:localhost}
 
 logging:
