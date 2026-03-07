@@ -35,4 +35,12 @@ public class NatsProducer {
         natsConnection.flush(Duration.ofMillis(100));
         log.debug("Published: {} to {}", msg, subjName);
     }
+
+    public void publish(String subject, byte[] message) throws InterruptedException, TimeoutException {
+        log.debug("attempting to publish to NATS subject publishing to NATS subject");
+        natsConnection.publish(subject, message);
+        log.trace("flushing connection to NATS");
+        natsConnection.flush(Duration.ofMillis(100));
+        log.debug("Published: {} to {}", new String(message), subject);
+    }
 }
