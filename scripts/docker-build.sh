@@ -12,9 +12,11 @@ else
 fi
 pushd "${BASEDIR}/.."
 
+set -eou pipefail
+
 ./gradlew bootJar
-cp ./app/build/libs/*SNAPSHOT.jar ./app.jar
-IMAGE_NAME="mikeyfennelly/ise-y2-b3-project-collector:dev-$(date "+%Y%m%d%H%M%S")"
+cp ./build/libs/*SNAPSHOT.jar ./app.jar
+IMAGE_NAME="mikeyfennelly/ise-y2-b3-project-collector:latest"
 docker build -t "${IMAGE_NAME}" .
 
 docker login
