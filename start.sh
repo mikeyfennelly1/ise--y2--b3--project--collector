@@ -12,7 +12,7 @@ else
 fi
 cd "${BASEDIR}"
 
-source "${BASEDIR}"/../.env
+source "${BASEDIR}"/../.env.local
 source "${BASEDIR}"/../scripts/helpers.sh
 
 SERVICE_NAME="collector"
