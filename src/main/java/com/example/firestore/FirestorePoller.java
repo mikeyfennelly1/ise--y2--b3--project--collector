@@ -46,8 +46,21 @@ public class FirestorePoller {
                     Map<String, Object> messagePayload = new HashMap<>();
                     
                     String sourceName = doc.getString("device_id");
-                    Long timestamp = doc.getLong("read_time") / 1000; 
+                    Long readTime = doc.getLong("read_time"); 
+                    Object rawMetrics = doc.get("metrics");
 
+                    if (sourceName == null || readTime == null || rawMetrics == null){
+                        log.warn("Skipping document {} due to missing required fields {device_id={}, read_time={}, metrics={}}", doc.getId(), sourceName, readTime, rawMetrics);
+                        doc.getReference().update("processed", true); // mark as processed to avoid reprocessing malformed documents
+                        continue;
+                    }
+                    if (!(rawMetrics instanceof Map)){
+                        log.warn("Skipping document {} due to 'metrics' field not being a map", doc.getId());
+                        doc.getReference().update("processed", true); 
+                        continue;
+                    }
+
+                    long timestamp = readTime / 1000;  
                     Map<String, Double> metrics = new HashMap<>();
                     ((Map<String, Object>) doc.get("metrics")).forEach((k, v) -> metrics.put(k, ((Number) v).doubleValue())); // convert to Map<String, Double> for serialization
 
@@ -65,7 +78,7 @@ public class FirestorePoller {
             }
         }
         catch (Exception e){
-            log.error("Error polling Firestore: {}", e.getMessage());
+            log.error("Error polling Firestore: {}", e.getMessage(), e);
         }
     }
 }
