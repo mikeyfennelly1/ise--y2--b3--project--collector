@@ -29,6 +29,10 @@ public class NatsConfiguration {
     @Getter
     @Value("${spring.nats.host}")
     private String natsHost;
+    
+    @Getter
+    @Value("${spring.nats.android-topic-name}")
+    private String androidMetricsSubject;
 
     @Getter
     private Connection connection;

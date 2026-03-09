@@ -37,3 +37,6 @@ out/
 .vscode/
 .env
 app.jar
+
+### Firebase service account key ###
+*service-account*.json

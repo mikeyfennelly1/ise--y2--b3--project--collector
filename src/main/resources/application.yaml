@@ -4,11 +4,18 @@ spring:
   nats:
     port: ${NATS_PORT:4222}
     topic-name: desktop-sysinfo
+    android-topic-name: android-device-metrics
     host: ${NATS_HOST:localhost}
 
 logging:
   level:
     root: ${COLLECTOR_LOG_LEVEL:DEBUG}
+    # Suppress noisy third-party DEBUG output
+    io.grpc.netty: WARN
+    io.opencensus: WARN
+    jdk.event.security: WARN
+    sun.net.www: WARN
+    com.google.api.client.http.HttpTransport: WARN
 server:
   port: ${COLLECTOR_LISTEN_PORT:8081}
 collector:
