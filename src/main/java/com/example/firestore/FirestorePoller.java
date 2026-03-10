@@ -66,7 +66,7 @@ public class FirestorePoller {
 
                     messagePayload.put("read_time", timestamp);
                     messagePayload.put("values", metrics);
-                    messagePayload.put("source_properties", Map.of("producer_name", "android-" + sourceName));
+                    messagePayload.put("producer_name", "android-" + sourceName);
 
                     byte[] messageBytes = objectMapper.writeValueAsBytes(messagePayload);
                     natsProducer.publish(natsConfig.getAndroidMetricsSubject(), messageBytes);
