@@ -16,7 +16,7 @@ set -eou pipefail
 
 ./gradlew bootJar
 cp ./build/libs/*SNAPSHOT.jar ./app.jar
-IMAGE_NAME="mikeyfennelly/ise-y2-b3-project-collector:latest"
+IMAGE_NAME="mikeyfennelly/cotccollector:latest"
 docker build -t "${IMAGE_NAME}" .
 
 docker login
