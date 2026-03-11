@@ -39,6 +39,6 @@ fi
 # Start API
 ################################################
 echo "${SERVICE_NAME}: Starting API..."
-var_must_exist COLLECTOR_LISTEN_PORT
-export COLLECTOR_LISTEN_PORT
+var_must_exist GOOGLE_APPLICATION_CREDENTIALS
+export GOOGLE_APPLICATION_CREDENTIALS
 "${BASEDIR}"/gradlew bootRun --args='--collector.id=1'
